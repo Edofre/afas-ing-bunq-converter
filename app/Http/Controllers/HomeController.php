@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function process(ProcessRequest $request)
     {
         // Store the file
-        $path = \Storage::putFile('csv', $request->file('ing-file'));
+        $path = \Storage::putFile('csv', $request->file('bunq-file'));
 
         // Dispatch job
         Process::dispatch($path);
