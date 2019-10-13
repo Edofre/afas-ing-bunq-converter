@@ -37,6 +37,26 @@ class TransactionsExport implements FromCollection, WithMapping
      */
     public function map($row): array
     {
+        // ------ FROM ------ Bunq
+        // Date
+        // Interest Date
+        // Amount
+        // Account
+        // Counterparty
+        // Name
+        // Description
+
+        // ------- TO ------- Ing
+        // Datum
+        // Naam / Omschrijving
+        // Rekening
+        // Tegenrekening
+        // Code
+        // Af Bij
+        // Bedrag (EUR)
+        // MutatieSoort
+        // Mededelingen
+
         return [
             $row[0],
             $row[1],

@@ -32,13 +32,13 @@
                             <div class="input-group">
                                 <input
                                         type="file"
-                                        class="custom-file-input @error('ing-file') is-invalid @enderror"
-                                        name="ing-file"
-                                        id="ing-file"
-                                        aria-describedby="ing-file"
+                                        class="custom-file-input @error('bunq-file') is-invalid @enderror"
+                                        name="bunq-file"
+                                        id="bunq-file"
+                                        aria-describedby="bunq-file"
                                         accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
                                 />
-                                <label id="ing-file-label" class="custom-file-label" for="ing-file">{{ __('Choose file') }}</label>
+                                <label id="bunq-file-label" class="custom-file-label" for="bunq-file">{{ __('Choose file') }}</label>
                             </div>
                         </div>
 
@@ -57,10 +57,10 @@
 
 @push('scripts')
     <script type="text/javascript">
-      $('#ing-file').on('change', function() {
+      $('#bunq-file').on('change', function() {
         let fileName = $(this).val()
         console.log(fileName)
-        $('#ing-file-label').text(fileName)
+        $('#bunq-file-label').text(fileName)
       })
     </script>
 @endpush

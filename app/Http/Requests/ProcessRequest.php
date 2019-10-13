@@ -16,7 +16,7 @@ class ProcessRequest extends Request
     public function rules()
     {
         $rules = [
-            'ing-file' => [
+            'bunq-file' => [
                 'required',
                 'file',
                 'mimes:csv,txt',
