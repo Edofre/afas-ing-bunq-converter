@@ -12,6 +12,21 @@ use Maatwebsite\Excel\Concerns\ToCollection;
  */
 class TransactionsImport implements ToCollection
 {
+    /** @var string */
+    private $fileName;
+
+    /**
+     * TransactionsImport constructor.
+     * @param $path
+     */
+    public function __construct($path)
+    {
+        // Get the proper file name
+        if (preg_match('/csv\/(.*?).txt/', $path, $match) == 1) {
+            $this->fileName = $match[1];
+        }
+    }
+
     /**
      * @param Collection $rows
      * @throws \PhpOffice\PhpSpreadsheet\Exception
@@ -19,6 +34,9 @@ class TransactionsImport implements ToCollection
      */
     public function collection(Collection $rows)
     {
-        \Excel::store(new TransactionsExport($rows), 'csv-processed/test.csv');
+        // Skip the first row because we don't need the headers
+        $rows->forget(0);
+
+        \Excel::store(new TransactionsExport($rows), "csv-processed/{$this->fileName}.csv");
     }
 }

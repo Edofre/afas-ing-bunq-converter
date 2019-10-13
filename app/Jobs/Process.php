@@ -37,7 +37,7 @@ class Process implements ShouldQueue
     public function handle()
     {
         // Import the excel as a collection
-        \Excel::import(new TransactionsImport(), $this->path);
+        \Excel::import(new TransactionsImport($this->path), $this->path);
 
         // Delete the file because we don't need it anymore
         \Storage::delete($this->path);
