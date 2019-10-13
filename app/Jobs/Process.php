@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Csv\Imports\TransactionsImport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,16 +17,16 @@ class Process implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $file;
+    /** @var string */
+    private $path;
 
     /**
      * Create a new job instance.
-     *
-     * @return void
+     * @param string $path
      */
-    public function __construct($file)
+    public function __construct($path)
     {
-        $this->file = $file;
+        $this->path = $path;
     }
 
     /**
@@ -35,6 +36,10 @@ class Process implements ShouldQueue
      */
     public function handle()
     {
-        //
+        // Import the excel as a collection
+        \Excel::import(new TransactionsImport(), $this->path);
+
+        // Delete the file because we don't need it anymore
+        \Storage::delete($this->path);
     }
 }
