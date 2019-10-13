@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProcessRequest;
+use App\Jobs\Process;
 
 /**
  * Class HomeController
@@ -22,12 +23,15 @@ class HomeController extends Controller
 
     /**
      * @param ProcessRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function process(ProcessRequest $request)
     {
-        //        var_dump($request->file('ing-file'));
+        // Store the file
+        $path = \Storage::putFile('csv', $request->file('ing-file'));
 
         // Dispatch job
+        Process::dispatch($path);
 
         flash(__('Your file is being processed'))->success();
         return redirect()->back();
